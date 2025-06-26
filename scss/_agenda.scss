@@ -1,0 +1,46 @@
+@import 'variables';
+
+.agenda-form {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    input,
+    select,
+    button {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1.5px solid #aaa;
+      border-radius: 6px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: $color-accent;
+      outline: none;
+    }
+
+    button {
+      background-color: $color-accent;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+
+      &:hover,
+      &:focus {
+        background-color: $color-accent-hover;
+        outline: none;
+      }
+    }
+  }
+
+  .agenda-calendario p {
+    font-style: italic;
+    color: #666;
+    font-size: 1.1rem;
+  }
+}

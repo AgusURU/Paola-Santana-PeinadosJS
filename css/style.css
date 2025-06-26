@@ -1,0 +1,197 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.bodys {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+@media (max-width: 480px) {
+  body.bodys {
+    margin-top: 120px;
+  }
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header img {
+  max-width: 100px;
+  height: auto;
+}
+.header .paginas ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+.header .paginas a {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}
+.header .paginas .icono-nav {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+.header .paginas .icono-nav:hover, .header .paginas .icono-nav:focus {
+  transform: scale(1.1);
+  outline: none;
+}
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .header h1 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  .header .paginas ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .header .icono-nav {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .footer-text {
+  font-size: 0.9rem;
+  color: #222;
+}
+.footer .instagram-btn {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) saturate(100%) invert(26%) sepia(68%) saturate(560%) hue-rotate(352deg) brightness(89%) contrast(95%);
+  transition: filter 0.3s ease;
+}
+.footer .instagram-btn:hover, .footer .instagram-btn:focus {
+  filter: brightness(1.1) saturate(120%) invert(30%) sepia(80%) saturate(700%) hue-rotate(340deg) brightness(95%) contrast(110%);
+  outline: none;
+}
+
+.agenda-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.agenda-form form input,
+.agenda-form form select,
+.agenda-form form button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+.agenda-form form input:focus,
+.agenda-form form select:focus {
+  border-color: #cc7a00;
+  outline: none;
+}
+.agenda-form form button {
+  background-color: #cc7a00;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.agenda-form form button:hover, .agenda-form form button:focus {
+  background-color: #b26700;
+  outline: none;
+}
+.agenda-form .agenda-calendario p {
+  font-style: italic;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.galeria-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  padding-bottom: 100px;
+}
+.galeria-container img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.galeria-container img:hover, .galeria-container img:focus {
+  transform: scale(1.05);
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  .galeria-container img {
+    height: 150px;
+  }
+}
+.ubicacion-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 100px;
+}
+.ubicacion-container .mapa iframe {
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+.ubicacion-container .fachada img {
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.sobre-nosotros h2 {
+  margin-bottom: 1rem;
+  color: #cc7a00;
+}
+.sobre-nosotros p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+/*# sourceMappingURL=style.css.map */
