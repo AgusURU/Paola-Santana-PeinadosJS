@@ -1,8 +1,9 @@
-@import 'variables';
-@import 'base';
-@import 'header';
-@import 'footer';
-@import 'agenda';
-@import 'galeria';
-@import 'ubicacion';
-@import 'sobre-nosotros';
+@use 'variables' as *;
+@use 'base';
+@use 'header';
+@use 'footer';
+@use 'agenda';
+@use 'galeria';
+@use 'ubicacion';
+@use 'sobre-nosotros';
+

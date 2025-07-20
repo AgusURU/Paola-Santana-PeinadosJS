@@ -1,12 +1,19 @@
+@use 'variables';
+
 .sobre-nosotros {
+
+  main.sobre-nosotros {
+  padding-bottom: 70px;
+}
+
   h2 {
     margin-bottom: 1rem;
-    color: $color-accent;
+    color: variables.$color-accent;
   }
 
   p {
     margin-bottom: 1rem;
     font-size: 1.1rem;
-    color: $color-text;
+    color: variables.$color-text;
   }
 }
