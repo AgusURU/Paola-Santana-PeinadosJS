@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="shortcut icon" href="../assets/logo.png.png" type="image/x-icon" />
+</head>
+
+<body class="bodys d-flex flex-column min-vh-100">
+
+    <header class="header fixed-top bg-white shadow-sm d-flex justify-content-between align-items-center px-3 py-2">
+    <a href="../index.html" class="d-flex align-items-center">
+      <img src="../assets/logo.png.png" alt="Logo principal" class="img-fluid" style="max-width: 100px" />
+    </a>
+    <h1 class="text-center flex-grow-1 text-black fst-italic fs-1 m-0">Paola Santana Peinados</h1>
+    <nav class="paginas">
+      <ul class="list-unstyled d-flex gap-3 mb-0">
+        <li><a href="../pages/galeria.html" title="Galería"><img src="../assets/icono-galeria.png" alt="Galería" class="icono-nav" /></a></li>
+        <li><a href="../pages/agenda.html" title="Agenda"><img src="../assets/icono-agenda.png" alt="Agenda" class="icono-nav" /></a></li>
+        <li><a href="../pages/ubicacion.html" title="Ubicación"><img src="../assets/icono-ubicacion.png" alt="Ubicación" class="icono-nav" /></a></li>
+        <li><a href="../pages/sobre_nosotros.html" title="Sobre Nosotros"><img src="../assets/icono-info.png" alt="Sobre Nosotros" class="icono-nav" /></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div style="margin-top: 80px;"></div>
+
+  </div>
+
+  <!-- Login para acceder al panel -->
+  <div id="login-admin" class="container py-5 text-center">
+    <h2>Acceso restringido</h2>
+    <input type="password" id="admin-pass" class="form-control my-3 mx-auto" style="max-width: 300px;" placeholder="Contraseña de acceso">
+    <button class="btn btn-primary" onclick="verificarClave()">Ingresar</button>
+  </div>
+
+  <!-- Panel visible solo tras login -->
+  <div id="admin-panel" class="container py-5 d-none">
+
+    <h2 class="mb-4 text-center">Panel de Administración</h2>
+
+    <!-- Lista de turnos -->
+    <div class="mb-5">
+      <h4>Turnos agendados</h4>
+      <ul id="admin-turnos" class="list-group">
+        <!-- Se cargan por JS -->
+      </ul>
+    </div>
+
+    <!-- Bloqueo de horarios -->
+    <div class="mb-4">
+      <h4>Deshabilitar horarios para una fecha</h4>
+
+      <!-- Segunda contraseña para bloquear horarios -->
+      <div id="bloqueo-login">
+        <input type="password" id="clave-bloqueo" class="form-control my-2" placeholder="Contraseña para bloqueo">
+        <button class="btn btn-secondary mb-3" onclick="verificarBloqueo()">Acceder</button>
+      </div>
+
+      <!-- Panel para bloquear -->
+      <div id="bloqueo-panel" class="d-none">
+        <label for="fecha-bloqueo" class="form-label">Fecha:</label>
+        <input type="date" id="fecha-bloqueo" class="form-control my-2">
+
+        <label for="bloqueo-horas" class="form-label">Seleccionar horarios:</label>
+        <select multiple class="form-select my-2" id="bloqueo-horas" size="8">
+        <!-- Formulario para desbloquear horarios -->
+        <hr>
+        <h5>Horarios bloqueados actuales</h5>
+        <label for="fecha-desbloqueo" class="form-label">Seleccionar fecha:</label>
+        <input type="date" id="fecha-desbloqueo" class="form-control my-2" onchange="mostrarBloqueosFecha()" />
+
+    <select multiple class="form-select my-2" id="bloqueo-horas-desbloqueo" size="8">
+  <!-- Se llenará dinámicamente -->
+</select>
+
+<button class="btn btn-success" onclick="desbloquearHorarios()">Quitar bloqueo</button>
+
+          <!-- Se llena con JS -->
+        </select>
+
+        <button class="btn btn-warning" onclick="bloquearHorarios()">Poner bloqueo</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer fixed-bottom bg-white shadow-sm d-flex justify-content-between align-items-center px-3 py-2">
+    <div class="footer-text text-black">Derechos reservados</div>
+    <a href="https://instagram.com/paolasantanapeinados" target="_blank" rel="noopener" aria-label="Instagram">
+      <img src="../assets/instagram.png" alt="Instagram" class="instagram-btn" />
+    </a>
+  </footer>
+
+  <script src="../js/admin.js"></script>
+</body>
+</html>

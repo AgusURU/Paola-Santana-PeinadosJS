@@ -25,28 +25,54 @@
     </nav>
   </header>
 
-  <main class="agenda-container container mt-5 pt-5 flex-grow-1">
-    <div class="row g-4">
-      <section class="agenda-form col-12 col-md-6">
-        <h2>Reservar Turno</h2>
-        <form>
-          <input type="text" placeholder="Nombre completo" required />
-          <input type="tel" placeholder="Teléfono" required />
-          <select required>
-            <option value="" disabled selected>Seleccioná un servicio</option>
-            <option value="peinado">Peinado</option>
-            <option value="corte">Corte</option>
-            <option value="coloracion">Coloración</option>
-          </select>
-          <input type="date" required />
-          <button type="submit">Enviar</button>
-        </form>
-      </section>
+    <div style="margin-top: 100px;"></div>
 
-      <section class="agenda-calendario col-12 col-md-6">
-        <h2>Calendario de Turnos</h2>
-        <p>Próximamente calendario interactivo.</p>
-      </section>
+
+  <main class="container my-5">
+    <form id="form-turno" class="mb-4">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="nombre" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="fecha" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="hora" class="form-label">Hora</label>
+        <select class="form-select" id="hora" required>
+          <option value="">Seleccionar hora</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="servicio" class="form-label">Servicio</label>
+        <select class="form-select" id="servicio" required>
+          <option value="Corte">Corte</option>
+          <option value="Peinado">Peinado</option>
+          <option value="Color">Color</option>
+          <option value="Brushing">Brushing</option>
+          <option value="Balayage">Balayage</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn w-100" style="background-color: goldenrod; color: black;">Reservar turno</button>
+
+    </form>
+
+    <div id="mensaje-exito" class="alert alert-success d-none text-center">
+      ¡Turno reservado con éxito!
+    </div>
+
+    <h3 class="text-center my-4">Horarios disponibles</h3>
+    <ul id="lista-turnos" class="list-group mb-5">
+      <!-- Horarios generados dinámicamente -->
+    </ul>
+
+    <div class="text-center">
+      <a href="admin.html" class="btn btn-outline-secondary">Panel de administración</a>
     </div>
   </main>
 
@@ -61,3 +87,5 @@
 </body>
 
 </html>
+
+<script src="../js/agenda.js"></script>
