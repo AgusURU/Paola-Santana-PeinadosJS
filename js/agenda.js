@@ -164,11 +164,12 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const nombre = document.getElementById("nombre").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
   const servicio = document.getElementById("servicio").value;
   const fecha = fechaInput.value;
   const hora = horaSelect.value;
 
-  if (!nombre || !servicio || !fecha || !hora) {
+  if (!nombre || !telefono || !servicio || !fecha || !hora) {
     alert("Por favor completá todos los campos.");
     return;
   }
@@ -181,7 +182,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   try {
-    await addDoc(collection(db, "reservas"), { nombre, servicio, fecha, hora, notificado: false });
+    await addDoc(collection(db, "reservas"), { nombre, telefono, servicio, fecha, hora, notificado: false });
     alert("Reserva realizada!");
     form.reset();
     horaSelect.innerHTML = '<option value="">Seleccionar</option>';

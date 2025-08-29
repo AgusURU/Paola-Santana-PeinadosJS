@@ -42,8 +42,8 @@ async function cargarTurnos() {
     const li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between align-items-center";
     li.innerHTML = `
-      ${t.fecha} ${t.hora} - ${t.nombre} (${t.servicio})
-      <button class="btn btn-danger btn-sm">Eliminar</button>
+      ${t.fecha} ${t.hora} - ${t.nombre} (${t.servicio}) - <span class="text-secondary">Tel: ${t.telefono || 'No informado'}</span>
+      <button class="btn btn-danger btn-sm ms-2">Eliminar</button>
     `;
     const btn = li.querySelector("button");
     btn.addEventListener("click", () => eliminarTurnoFirestore(docSnap.id));
