@@ -1,6 +1,35 @@
-import { db } from './firebase.js';
-import { collection, addDoc, query, where, getDocs, onSnapshot, doc, updateDoc } from "firebase/firestore";
+// agenda.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  onSnapshot,
+  doc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
+// Configuración de Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyBlv2_ly2BPTKTTgMujCQsK4i_LwiWfPvs",
+  authDomain: "paola-santana-peluqueria.firebaseapp.com",
+  projectId: "paola-santana-peluqueria",
+  storageBucket: "paola-santana-peluqueria.firebasestorage.app",
+  messagingSenderId: "956120172923",
+  appId: "1:956120172923:web:ff349d624dd1ffc48395de",
+  measurementId: "G-2EEBHTQPT5"
+};
+
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+
+// Elementos del DOM
 const form = document.getElementById("form-turno");
 const listaTurnos = document.getElementById("lista-turnos");
 const fechaInput = document.getElementById("fecha");
@@ -15,7 +44,7 @@ const horarios = [
 
 let unsubscribe = null;
 
-// Solicitar permiso para notificaciones
+// Solicitar permiso para notificaciones al cargar
 window.addEventListener("DOMContentLoaded", () => {
   mostrarTurnos();
 
@@ -24,7 +53,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Mostrar turnos y actualizar select
+// Actualizar lista de turnos y select de horas
 function actualizarListaYSelect(turnos) {
   const fechaSeleccionada = fechaInput.value;
   if (!fechaSeleccionada) return;
@@ -33,17 +62,15 @@ function actualizarListaYSelect(turnos) {
   listaTurnos.innerHTML = "";
 
   const hoy = new Date();
-  const esHoy = fechaSeleccionada === hoy.toISOString().slice(0,10);
-
-  turnos.forEach(t => t); // solo para evitar warning si no usamos el array directamente
+  const esHoy = fechaSeleccionada === hoy.toISOString().slice(0, 10);
 
   horarios.forEach(hora => {
     const li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between align-items-center";
 
-    const estaOcupado = turnos.some(t => t.hora === hora);
-
+    const estaOcupado = turnos.some(t => t.fecha === fechaSeleccionada && t.hora === hora);
     let turnoPasado = false;
+
     if (esHoy) {
       const [horas, minutos] = hora.split(":").map(Number);
       const turnoDate = new Date();
@@ -71,7 +98,7 @@ function actualizarListaYSelect(turnos) {
   });
 }
 
-// Mostrar turnos en tiempo real
+// Mostrar turnos en tiempo real desde Firestore
 async function mostrarTurnos() {
   const fechaSeleccionada = fechaInput.value;
   if (!fechaSeleccionada) return;
@@ -86,7 +113,7 @@ async function mostrarTurnos() {
   });
 }
 
-// Revisar turnos próximos y notificar si no fue notificado aún
+// Revisar turnos próximos y notificar
 async function revisarTurnosProximos(turnos) {
   const ahora = new Date();
 
@@ -101,7 +128,6 @@ async function revisarTurnosProximos(turnos) {
 
     if (diffMinutos > 0 && diffMinutos <= 30) {
       mostrarNotificacion(turno);
-      // Marcar como notificado en Firestore
       const docRef = doc(db, "reservas", turno.id);
       await updateDoc(docRef, { notificado: true });
     }
@@ -118,7 +144,7 @@ function mostrarNotificacion(turno) {
   }
 }
 
-// Actualizar turnos al cambiar la fecha
+// Evento al cambiar fecha
 fechaInput.addEventListener("change", mostrarTurnos);
 
 // Guardar turno en Firestore
