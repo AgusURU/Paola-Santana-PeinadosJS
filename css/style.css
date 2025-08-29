@@ -202,4 +202,8 @@ main {
   color: #ffffff;
 }
 
+.logo-dorado {
+  filter: sepia(1) saturate(7) hue-rotate(10deg) brightness(1.2) contrast(1.1);
+}
+
 /*# sourceMappingURL=style.css.map */
