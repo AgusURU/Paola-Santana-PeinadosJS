@@ -27,17 +27,17 @@ function verificarBloqueo() {
 }
 
 // Mostrar turnos agendados
-function cargarTurnos() {
+async function cargarTurnos() {
   const lista = document.getElementById("admin-turnos");
   lista.innerHTML = "";
-  const turnos = JSON.parse(localStorage.getItem("turnos")) || [];
-
-  turnos.forEach((t, i) => {
+  const querySnapshot = await getDocs(collection(db, "reservas"));
+  querySnapshot.forEach((docSnap) => {
+    const t = docSnap.data();
     const li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between align-items-center";
     li.innerHTML = `
       ${t.fecha} ${t.hora} - ${t.nombre} (${t.servicio})
-      <button class="btn btn-danger btn-sm" onclick="eliminarTurno(${i})">Eliminar</button>
+      <button class="btn btn-danger btn-sm" onclick="eliminarTurnoFirestore('${docSnap.id}')">Eliminar</button>
     `;
     lista.appendChild(li);
   });
@@ -87,4 +87,27 @@ function bloquearHorarios() {
   localStorage.setItem("bloqueos", JSON.stringify(bloqueos));
 
   alert("Horarios bloqueados para " + fecha);
+}
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBlv2_ly2BPTKTTgMujCQsK4i_LwiWfPvs",
+  authDomain: "paola-santana-peluqueria.firebaseapp.com",
+  projectId: "paola-santana-peluqueria",
+  storageBucket: "paola-santana-peluqueria.appspot.com",
+  messagingSenderId: "956120172923",
+  appId: "1:956120172923:web:ff349d624dd1ffc48395de",
+  measurementId: "G-2EEBHTQPT5"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function eliminarTurnoFirestore(id) {
+  if (confirm("¿Seguro que deseas eliminar este turno?")) {
+    await deleteDoc(doc(db, "reservas", id));
+    cargarTurnos();
+  }
 }
