@@ -10,7 +10,8 @@ import {
   getDocs,
   onSnapshot,
   doc,
-  updateDoc
+  updateDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // Configuración de Firebase
@@ -54,12 +55,19 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // Actualizar lista de turnos y select de horas
-function actualizarListaYSelect(turnos) {
+async function actualizarListaYSelect(turnos) {
   const fechaSeleccionada = fechaInput.value;
   if (!fechaSeleccionada) return;
 
   horaSelect.innerHTML = '<option value="">Seleccionar</option>';
   listaTurnos.innerHTML = "";
+
+  // Consulta bloqueos en Firestore
+  let bloqueados = [];
+  const docSnap = await getDoc(doc(db, "bloqueos", fechaSeleccionada));
+  if (docSnap.exists()) {
+    bloqueados = docSnap.data().horas || [];
+  }
 
   const hoy = new Date();
   const esHoy = fechaSeleccionada === hoy.toISOString().slice(0, 10);
@@ -69,6 +77,7 @@ function actualizarListaYSelect(turnos) {
     li.className = "list-group-item d-flex justify-content-between align-items-center";
 
     const estaOcupado = turnos.some(t => t.fecha === fechaSeleccionada && t.hora === hora);
+    const estaBloqueado = bloqueados.includes(hora);
     let turnoPasado = false;
 
     if (esHoy) {
@@ -78,7 +87,10 @@ function actualizarListaYSelect(turnos) {
       if (turnoDate < hoy) turnoPasado = true;
     }
 
-    if (estaOcupado) {
+    if (estaBloqueado) {
+      li.textContent = `${hora} - BLOQUEADO`;
+      li.classList.add("text-warning");
+    } else if (estaOcupado) {
       li.textContent = `${hora} - OCUPADO`;
       li.classList.add("text-danger");
     } else if (turnoPasado) {

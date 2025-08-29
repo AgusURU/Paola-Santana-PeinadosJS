@@ -51,41 +51,20 @@
     </div>
 
     <!-- Bloqueo de horarios -->
-    <div class="mb-4">
-      <h4>Deshabilitar horarios para una fecha</h4>
+<!-- Bloqueo de horarios -->
+<div class="mb-4">
+  <h4>Deshabilitar horarios para una fecha</h4>
+  <label for="fecha-bloqueo" class="form-label">Fecha:</label>
+  <input type="date" id="fecha-bloqueo" class="form-control my-2" onchange="mostrarBloqueosFecha()">
 
-      <!-- Segunda contraseña para bloquear horarios -->
-      <div id="bloqueo-login">
-        <input type="password" id="clave-bloqueo" class="form-control my-2" placeholder="Contraseña para bloqueo">
-        <button class="btn btn-secondary mb-3" onclick="verificarBloqueo()">Acceder</button>
-      </div>
+  <label for="bloqueo-horas" class="form-label">Seleccionar horarios:</label>
+  <select multiple class="form-select my-2" id="bloqueo-horas" size="8">
+    <!-- Se llena con JS -->
+  </select>
 
-      <!-- Panel para bloquear -->
-      <div id="bloqueo-panel" class="d-none">
-        <label for="fecha-bloqueo" class="form-label">Fecha:</label>
-        <input type="date" id="fecha-bloqueo" class="form-control my-2">
-
-        <label for="bloqueo-horas" class="form-label">Seleccionar horarios:</label>
-        <select multiple class="form-select my-2" id="bloqueo-horas" size="8">
-        <!-- Formulario para desbloquear horarios -->
-        <hr>
-        <h5>Horarios bloqueados actuales</h5>
-        <label for="fecha-desbloqueo" class="form-label">Seleccionar fecha:</label>
-        <input type="date" id="fecha-desbloqueo" class="form-control my-2" onchange="mostrarBloqueosFecha()" />
-
-    <select multiple class="form-select my-2" id="bloqueo-horas-desbloqueo" size="8">
-  <!-- Se llenará dinámicamente -->
-</select>
-
-<button class="btn btn-success" onclick="desbloquearHorarios()">Quitar bloqueo</button>
-
-          <!-- Se llena con JS -->
-        </select>
-
-        <button class="btn btn-warning" onclick="bloquearHorarios()">Poner bloqueo</button>
-      </div>
-    </div>
-  </div>
+  <button class="btn btn-warning" onclick="bloquearHorarios()">Poner bloqueo</button>
+  <button class="btn btn-success" onclick="desbloquearHorarios()">Quitar bloqueo</button>
+</div>
 
   <footer class="footer fixed-bottom bg-white shadow-sm d-flex justify-content-between align-items-center px-3 py-2">
     <div class="footer-text text-black">Derechos reservados</div>
@@ -94,6 +73,6 @@
     </a>
   </footer>
 
-  <script src="../js/admin.js"></script>
+  <script type="module" src="../js/admin.js"></script>
 </body>
 </html>
